@@ -34,7 +34,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         );
 
         modelBuilder.Entity<Product>().HasData(
-            new { Id = 1, Name = "Laptop Pro 15", Description = "Laptop professionale 15 pollici", Price = 1299.99m, CategoryId = 1, Stock = 25 },
+            new { Id = 1, Name = "Laptop Pro 15", Description = "Laptop professionale 15 pollici", Price = 999.99m, CategoryId = 1, Stock = 25 },
             new { Id = 2, Name = "Mouse Wireless", Description = "Mouse ergonomico senza fili", Price = 29.99m, CategoryId = 1, Stock = 150 },
             new { Id = 3, Name = "Tastiera Meccanica", Description = "Tastiera meccanica RGB", Price = 89.90m, CategoryId = 1, Stock = 75 },
             new { Id = 4, Name = "Scrivania Regolabile", Description = "Scrivania sit-stand motorizzata", Price = 449.00m, CategoryId = 2, Stock = 30 },

@@ -19,26 +19,35 @@ public static class CategoryEndpoints
     }
 
     static IResult GetAll(ICategoryRepository repository) =>
-        Results.Ok(repository.GetAll());
+        Results.Ok(repository.GetAll().Select(CategoryDto.FromCategory));
 
     static IResult GetById(int id, ICategoryRepository repository) =>
         repository.GetById(id) is { } category
-            ? Results.Ok(category)
+            ? Results.Ok(CategoryDto.FromCategory(category))
             : Results.NotFound();
 
     static IResult Create(Category category, ICategoryRepository repository)
     {
         var created = repository.Add(category);
-        return Results.Created($"/categories/{created.Id}", created);
+        return Results.Created($"/categories/{created.Id}", CategoryDto.FromCategory(created));
     }
 
     static IResult Update(int id, Category category, ICategoryRepository repository) =>
         repository.Update(id, category) is { } updated
-            ? Results.Ok(updated)
+            ? Results.Ok(CategoryDto.FromCategory(updated))
             : Results.NotFound();
 
-    static IResult Delete(int id, ICategoryRepository repository) =>
-        repository.Delete(id)
-            ? Results.NoContent()
-            : Results.NotFound();
+    static IResult Delete(int id, ICategoryRepository repository)
+    {
+        try
+        {
+            return repository.Delete(id)
+                ? Results.NoContent()
+                : Results.NotFound();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Results.Conflict(new { error = ex.Message });
+        }
+    }
 }

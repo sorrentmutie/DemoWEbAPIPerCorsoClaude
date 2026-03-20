@@ -6,7 +6,7 @@ public record ProductDto(
     string Name,
     string? Description,
     decimal Price,
-    Category Category,
+    CategoryDto Category,
     int Stock)
 {
     public static ProductDto FromProduct(Product product) =>
@@ -15,6 +15,6 @@ public record ProductDto(
             product.Name,
             product.Description,
             product.Price,
-            product.Category!,
+            CategoryDto.FromCategory(product.Category!),
             product.Stock);
 }

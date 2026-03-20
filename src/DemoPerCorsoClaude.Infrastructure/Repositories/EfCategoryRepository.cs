@@ -23,7 +23,7 @@ public class EfCategoryRepository(AppDbContext context) : ICategoryRepository
 
     public Category? Update(int id, Category category)
     {
-        var existing = context.Categories.Find(id);
+        var existing = context.Categories.Include(c => c.Products).FirstOrDefault(c => c.Id == id);
         if (existing is null)
             return null;
 
@@ -41,7 +41,7 @@ public class EfCategoryRepository(AppDbContext context) : ICategoryRepository
             return false;
 
         if (existing.Products.Count > 0)
-            return false;
+            throw new InvalidOperationException("Impossibile eliminare una categoria con prodotti associati.");
 
         context.Categories.Remove(existing);
         context.SaveChanges();
