@@ -15,3 +15,7 @@
  crea un dto per le categorie restituendo per ogni categoria il numero di prodotti
 
  aggiungiamo un progetto per gli unit test della logina che hai implementato. evidenzia tutti gli edge cases sia per prodotti che per categorie. ultrathink
+
+ aggiorna il @README.md
+
+ creiamo un frontend in blazor che usi la API. pensiamo a un componente che ci mostri una tabella dei prodotti e inseriamolo nella home
