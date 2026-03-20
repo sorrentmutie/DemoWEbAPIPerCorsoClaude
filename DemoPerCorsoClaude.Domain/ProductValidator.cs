@@ -5,7 +5,7 @@ public static class ProductValidator
 {
     private const int MaxNameLength = 20;
     private const decimal MinPrice = 0m;
-    private const decimal MaxPrice = 1000m;
+    private const decimal MaxPrice = 100m;
 
     /// <summary>Returns the list of business rule violations for the given request.</summary>
     public static IReadOnlyList<string> Validate(ProductRequest request)
