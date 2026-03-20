@@ -1,0 +1,61 @@
+@using DemoPerCorsoClaude.Frontend.Models
+@inject IHttpClientFactory HttpClientFactory
+
+@if (errorMessage is not null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else if (products is null)
+{
+    <p><em>Caricamento prodotti in corso...</em></p>
+}
+else if (products.Length == 0)
+{
+    <p>Nessun prodotto disponibile.</p>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Categoria</th>
+                <th class="text-end">Prezzo (€)</th>
+                <th class="text-end">Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@(product.Description ?? "—")</td>
+                    <td><span class="badge bg-secondary">@product.CategoryName</span></td>
+                    <td class="text-end">@product.Price.ToString("F2")</td>
+                    <td class="text-end">@product.Stock</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private ProductDto[]? products;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var http = HttpClientFactory.CreateClient("ProductsApi");
+            products = await http.GetFromJsonAsync<ProductDto[]>("products");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Impossibile caricare i prodotti: {ex.Message}";
+        }
+    }
+}

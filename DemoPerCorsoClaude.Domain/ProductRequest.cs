@@ -5,4 +5,5 @@ namespace DemoPerCorsoClaude.Domain;
 /// <param name="Description">Optional long description.</param>
 /// <param name="Price">Unit price in EUR.</param>
 /// <param name="Stock">Available quantity in stock.</param>
-public record ProductRequest(string Name, string? Description, decimal Price, int Stock);
+/// <param name="CategoryId">Id of the category this product belongs to.</param>
+public record ProductRequest(string Name, string? Description, decimal Price, int Stock, int CategoryId);
