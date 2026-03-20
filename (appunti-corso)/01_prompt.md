@@ -45,3 +45,9 @@ D: In che formato pensi di usarli con Claude Code?
 R: File da passare con --append-system-prompt
 D: In che lingua vuoi i file?
 R: Italiano
+
+---------------------------------------------------------------------------------------
+questo ci permette di lanciare claude e fargli impersonare quanto scritto sopra
+claude --system-prompt-file .\docs\system-prompts\analyst.md
+---------------------------------------------------------------------------------------
+
