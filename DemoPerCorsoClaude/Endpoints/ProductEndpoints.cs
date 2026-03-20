@@ -23,15 +23,24 @@ public static class ProductEndpoints
 
         group.MapPost("/", (Product product, IProductRepository repository) =>
         {
+            var errors = ProductValidator.Validate(product);
+            if (errors.Count > 0)
+                return Results.ValidationProblem(errors);
+
             var created = repository.Add(product);
             return Results.Created($"/products/{created.Id}", created);
         }).WithName("CreateProduct");
 
         group.MapPut("/{id:int}", (int id, Product product, IProductRepository repository) =>
-            repository.Update(id, product) is { } updated
+        {
+            var errors = ProductValidator.Validate(product);
+            if (errors.Count > 0)
+                return Results.ValidationProblem(errors);
+
+            return repository.Update(id, product) is { } updated
                 ? Results.Ok(updated)
-                : Results.NotFound())
-            .WithName("UpdateProduct");
+                : Results.NotFound();
+        }).WithName("UpdateProduct");
 
         group.MapDelete("/{id:int}", (int id, IProductRepository repository) =>
             repository.Delete(id)
