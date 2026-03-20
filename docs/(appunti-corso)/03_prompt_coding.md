@@ -20,4 +20,6 @@
 
  creiamo un frontend in blazor che usi la API. pensiamo a un componente che ci mostri una tabella dei prodotti e inseriamolo nella home
 
- 
+mi crei il branch task/1
+
+aggiorna il  limite sul prezzo dei prodotti e portalo a 100

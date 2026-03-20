@@ -34,13 +34,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         );
 
         modelBuilder.Entity<Product>().HasData(
-            new { Id = 1, Name = "Laptop Pro 15", Description = "Laptop professionale 15 pollici", Price = 999.99m, CategoryId = 1, Stock = 25 },
+            new { Id = 1, Name = "Laptop Pro 15", Description = "Laptop professionale 15 pollici", Price = 99.99m, CategoryId = 1, Stock = 25 },
             new { Id = 2, Name = "Mouse Wireless", Description = "Mouse ergonomico senza fili", Price = 29.99m, CategoryId = 1, Stock = 150 },
             new { Id = 3, Name = "Tastiera Meccanica", Description = "Tastiera meccanica RGB", Price = 89.90m, CategoryId = 1, Stock = 75 },
-            new { Id = 4, Name = "Scrivania Regolabile", Description = "Scrivania sit-stand motorizzata", Price = 449.00m, CategoryId = 2, Stock = 30 },
-            new { Id = 5, Name = "Sedia Ergonomica", Description = "Sedia da ufficio con supporto lombare", Price = 349.00m, CategoryId = 2, Stock = 20 },
-            new { Id = 6, Name = "Monitor 27 4K", Description = "Monitor IPS 27 pollici 4K", Price = 399.99m, CategoryId = 1, Stock = 40 },
-            new { Id = 7, Name = "Cuffie NC", Description = "Cuffie bluetooth con cancellazione rumore", Price = 199.90m, CategoryId = 3, Stock = 60 },
+            new { Id = 4, Name = "Scrivania Regolabile", Description = "Scrivania sit-stand motorizzata", Price = 99.00m, CategoryId = 2, Stock = 30 },
+            new { Id = 5, Name = "Sedia Ergonomica", Description = "Sedia da ufficio con supporto lombare", Price = 99.00m, CategoryId = 2, Stock = 20 },
+            new { Id = 6, Name = "Monitor 27 4K", Description = "Monitor IPS 27 pollici 4K", Price = 99.99m, CategoryId = 1, Stock = 40 },
+            new { Id = 7, Name = "Cuffie NC", Description = "Cuffie bluetooth con cancellazione rumore", Price = 79.90m, CategoryId = 3, Stock = 60 },
             new { Id = 8, Name = "Webcam HD", Description = "Webcam 1080p con microfono integrato", Price = 59.99m, CategoryId = 1, Stock = 100 }
         );
     }

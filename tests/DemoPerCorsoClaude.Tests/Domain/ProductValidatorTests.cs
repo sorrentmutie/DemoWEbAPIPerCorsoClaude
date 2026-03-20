@@ -78,10 +78,10 @@ public class ProductValidatorTests
     }
 
     [Fact]
-    public void Should_ReturnNoError_When_PriceIsExactly1000()
+    public void Should_ReturnNoError_When_PriceIsExactly100()
     {
         var product = new ProductBuilder()
-            .WithPrice(1000m)
+            .WithPrice(100m)
             .Build();
 
         var errors = ProductValidator.Validate(product);
@@ -220,14 +220,14 @@ public class ProductValidatorTests
 
         var errors = ProductValidator.Validate(product);
 
-        errors[nameof(Product.Price)].ShouldContain(e => e.Contains("1000"));
+        errors[nameof(Product.Price)].ShouldContain(e => e.Contains("100"));
     }
 
     [Fact]
     public void Should_ReturnNoError_When_PriceIsAtDecimalBoundary()
     {
         var product = new ProductBuilder()
-            .WithPrice(999.99m)
+            .WithPrice(99.99m)
             .Build();
 
         var errors = ProductValidator.Validate(product);

@@ -5,7 +5,7 @@ namespace DemoPerCorsoClaude.Domain.Services;
 /// <summary>Validatore per le regole di business dei prodotti.</summary>
 public static class ProductValidator
 {
-    public const decimal MaxPrice = 1000m;
+    public const decimal MaxPrice = 100m;
     public const int MaxNameLength = 20;
 
     public static Dictionary<string, string[]> Validate(Product product)
