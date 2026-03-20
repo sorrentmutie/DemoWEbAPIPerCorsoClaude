@@ -1,4 +1,4 @@
-# Error Handling — Progetto MES (.NET 10)
+# Gestione degli Errori — Progetto MES (.NET 10)
 
 ## 1. DomainException vs eccezioni di sistema
 
@@ -82,9 +82,9 @@ app.MapGet("/orders", async (IOrderRepository repo) =>
 });
 ```
 
-## 4. Result Pattern (alternativa alle eccezioni di dominio)
+## 4. Pattern Result (alternativa alle eccezioni di dominio)
 
-USE il Result pattern per flussi dove l'errore è un esito atteso, non un'eccezione.
+USE il pattern Result per flussi dove l'errore è un esito atteso, non un'eccezione.
 
 ```csharp
 public record Result<T>(T? Value, string? Error = null)

@@ -1,6 +1,6 @@
-# Testing Conventions — Progetto MES (.NET 10)
+# Convenzioni di Testing — Progetto MES (.NET 10)
 
-Stack: **xUnit** + **FluentAssertions** + **NSubstitute**
+Tecnologie: **xUnit** + **FluentAssertions** + **NSubstitute**
 
 ## 1. Struttura dei test — Arrange/Act/Assert
 
@@ -37,7 +37,7 @@ public void OrderServiceTest1()
 public void ItWorks()
 ```
 
-## 3. Builder pattern per entità di dominio
+## 3. Pattern Builder per entità di dominio
 
 ALWAYS USE un Builder per costruire entità nei test. NEVER ripetere costruttori complessi in ogni test.
 
@@ -67,7 +67,7 @@ USE **NSubstitute** per dipendenze esterne (repository, servizi HTTP, notifiche)
 USE **oggetti reali** per logica di dominio, value object e record.
 
 ```csharp
-// NSubstitute — dipendenza infrastrutturale
+// NSubstitute — mock di dipendenza infrastrutturale
 var repo = Substitute.For<IOrderRepository>();
 repo.GetActiveAsync().Returns(new[] { order });
 
@@ -88,10 +88,10 @@ ALWAYS USE un progetto separato con naming `<Progetto>.Tests`.
 
 ```
 DemoPerCorsoClaude/                  # codice sorgente
-DemoPerCorsoClaude.Tests/            # progetto test
-├── Domain/                          # test su entità e value object
+DemoPerCorsoClaude.Tests/            # progetto di test
+├── Domain/                          # test su entita' e value object
 ├── Application/                     # test su servizi applicativi
-├── Api/                             # test su endpoint (integration)
+├── Api/                             # test sugli endpoint (integrazione)
 └── Builders/                        # builder condivisi
 ```
 

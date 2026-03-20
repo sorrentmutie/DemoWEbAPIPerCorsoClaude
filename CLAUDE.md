@@ -1,33 +1,47 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Questo file fornisce indicazioni a Claude Code (claude.ai/code) per lavorare con il codice di questo repository.
 
-## Project Overview
+## Panoramica del Progetto
 
-ASP.NET Core Web API project (demo/course project) targeting **.NET 10**. Uses the minimal API style (no controllers). Currently has a single `/weatherforecast` endpoint.
+Progetto ASP.NET Core Web API (demo per corso) con target **.NET 10**. Usa lo stile minimal API (nessun controller). Attualmente ha un singolo endpoint `/weatherforecast`.
 
-## Build & Run Commands
+## Comandi di Build e Avvio
 
 ```bash
-# Restore, build, run
+# Ripristino, compilazione, avvio
 dotnet build DemoPerCorsoClaude/DemoPerCorsoClaude.csproj
 dotnet run --project DemoPerCorsoClaude
 
-# Run in watch mode (hot reload)
+# Avvio in modalità watch (hot reload)
 dotnet watch --project DemoPerCorsoClaude
 ```
 
-The app listens on `http://localhost:5082` (HTTP) and `https://localhost:7184` (HTTPS).
+L'app è in ascolto su `http://localhost:5082` (HTTP) e `https://localhost:7184` (HTTPS).
 
-## Solution Structure
+## Struttura della Solution
 
-- `DemoPerCorsoClaude.slnx` — solution file (XML-based slnx format)
-- `DemoPerCorsoClaude/` — the single Web API project
-  - `Program.cs` — application entry point with all endpoint definitions (minimal API style, no Startup class)
+- `DemoPerCorsoClaude.slnx` — file di soluzione (formato slnx basato su XML)
+- `DemoPerCorsoClaude/` — l'unico progetto Web API
+  - `Program.cs` — entry point dell'applicazione con tutte le definizioni degli endpoint (stile minimal API, nessuna classe Startup)
 
-## Key Details
+## Dettagli Importanti
 
-- OpenAPI is enabled in Development via `AddOpenApi()` / `MapOpenApi()`
-- No test project exists yet
-- No controllers — all endpoints are defined inline in `Program.cs` using `app.MapGet()` / `app.MapPost()` etc.
-- Nullable reference types and implicit usings are enabled
+- OpenAPI è abilitato in Development tramite `AddOpenApi()` / `MapOpenApi()`
+- Non esiste ancora un progetto di test
+- Nessun controller — tutti gli endpoint sono definiti inline in `Program.cs` con `app.MapGet()` / `app.MapPost()` ecc.
+- Nullable reference types e implicit usings sono abilitati
+
+## Documenti di Riferimento
+
+@import docs/agent_docs/clean-code.md
+Carica quando scrivi o revisioni codice C# (naming, magic numbers, leggibilità).
+
+@import docs/agent_docs/solid-principles.md
+Carica quando progetti nuove classi, servizi o modifichi l'architettura.
+
+@import docs/agent_docs/error-handling.md
+Carica quando implementi gestione errori, eccezioni o logging.
+
+@import docs/agent_docs/testing-conventions.md
+Carica quando scrivi, revisioni o correggi test.
