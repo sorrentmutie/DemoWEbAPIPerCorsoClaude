@@ -89,7 +89,7 @@ ALWAYS USE un progetto separato con naming `<Progetto>.Tests`.
 ```
 DemoPerCorsoClaude/                  # codice sorgente
 DemoPerCorsoClaude.Tests/            # progetto di test
-├── Domain/                          # test su entita' e value object
+├── Domain/                          # test su entità e value object
 ├── Application/                     # test su servizi applicativi
 ├── Api/                             # test sugli endpoint (integrazione)
 └── Builders/                        # builder condivisi

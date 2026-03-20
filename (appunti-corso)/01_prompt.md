@@ -23,3 +23,25 @@ Genera il file docs/agent_docs/error-handling.md
   Basa le regole sul pattern già presente in
   DomainException.cs e OrdersController.cs.
   Max 80 righe.
+
+Genera il file docs/agent_docs/testing-conventions.md
+per questo progetto.
+Includi: struttura Arrange/Act/Assert, naming dei test
+(Should_[Expected]_When_[Condition]), Builder pattern
+obbligatorio per le entità di dominio, quando usare
+NSubstitute vs oggetti reali, dove salvare i test.
+Basati su xUnit + FluentAssertions + NSubstitute.
+Max 80 righe.
+
+Aggiorna CLAUDE.md aggiungendo i riferimenti ai
+  quattro file appena creati nella sezione
+  '## Reference Docs'. Usa la sintassi @import.
+  Per ogni file aggiungi una riga che descrive
+  quando Claude deve caricarlo.
+
+
+II want to create a system prompt document for a requirements analyst that gathers informations and asksquestions to produce a REQUIREMENTS.md document that a solution architect can use to design the solution and plan the implementation
+D: In che formato pensi di usarli con Claude Code?
+R: File da passare con --append-system-prompt
+D: In che lingua vuoi i file?
+R: Italiano

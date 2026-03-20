@@ -7,7 +7,7 @@ Ogni classe ha una sola ragione per cambiare.
 ALWAYS SEPARATE registrazione endpoint, logica di business e accesso ai dati in classi distinte.
 
 ```csharp
-// Corretto — responsabilita' isolate
+// Corretto — responsabilità isolate
 // Domain/Entities/ProductionOrder.cs
 public record ProductionOrder(int Id, string ProductCode, DateTime DueDate);
 
@@ -56,12 +56,12 @@ public class KelvinConverter : ITemperatureConverter
     public int Convert(int temperatureC) => temperatureC + 273;
 }
 
-// Errato — if/switch che cresce a ogni nuova unita'
+// Errato — if/switch che cresce a ogni nuova unità
 public int Convert(int tempC, string unit) => unit switch
 {
     "F" => 32 + (int)(tempC / 0.5556),
     "K" => tempC + 273,
-    // ogni nuova unita' modifica questo metodo
+    // ogni nuova unità modifica questo metodo
 };
 ```
 
