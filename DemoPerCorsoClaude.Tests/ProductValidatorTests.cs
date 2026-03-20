@@ -66,13 +66,13 @@ public class ProductValidatorTests
         Assert.Single(errors);
     }
 
-    // ── Prezzo: boundary sul limite dei 1000 € ────────────────────────────────
+    // ── Prezzo: boundary sul limite dei 100 € ─────────────────────────────────
 
     [Theory]
     [InlineData(0)]
     [InlineData(0.01)]
-    [InlineData(999.99)]
-    [InlineData(1000)]
+    [InlineData(99.99)]
+    [InlineData(100)]
     public void Validate_PriceWithinRange_IsValid(double price)
     {
         var request = Valid() with { Price = (decimal)price };
@@ -83,9 +83,9 @@ public class ProductValidatorTests
     }
 
     [Fact]
-    public void Validate_Price1000_01_ReturnsError()
+    public void Validate_Price100_01_ReturnsError()
     {
-        var request = Valid() with { Price = 1000.01m };
+        var request = Valid() with { Price = 100.01m };
 
         var errors = ProductValidator.Validate(request);
 
@@ -100,7 +100,7 @@ public class ProductValidatorTests
         var errors = ProductValidator.Validate(request);
 
         Assert.Single(errors);
-        Assert.Contains(errors, e => e.Contains("1000"));
+        Assert.Contains(errors, e => e.Contains("100"));
     }
 
     // ── Prezzo: valori negativi ───────────────────────────────────────────────
@@ -163,7 +163,7 @@ public class ProductValidatorTests
     [Fact]
     public void Validate_EmptyNameAndInvalidPrice_ReturnsTwoErrors()
     {
-        var request = Valid() with { Name = "", Price = 1500m };
+        var request = Valid() with { Name = "", Price = 150m };
 
         var errors = ProductValidator.Validate(request);
 
