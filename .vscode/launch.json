@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "API",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-api",
+      "program": "${workspaceFolder}/src/DemoPerCorsoClaude/bin/Debug/net10.0/DemoPerCorsoClaude.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/DemoPerCorsoClaude",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      "name": "Web",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-web",
+      "program": "${workspaceFolder}/src/DemoPerCorsoClaude.Web/bin/Debug/net10.0/DemoPerCorsoClaude.Web.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/DemoPerCorsoClaude.Web",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "API + Web",
+      "configurations": ["API", "Web"]
+    }
+  ]
+}

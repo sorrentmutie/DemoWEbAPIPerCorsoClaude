@@ -1,0 +1,68 @@
+@rendermode InteractiveServer
+@inject IHttpClientFactory HttpClientFactory
+
+<h3>Prodotti</h3>
+
+@if (_products is null)
+{
+    <p>Caricamento...</p>
+}
+else if (_products.Length == 0)
+{
+    <p>Nessun prodotto trovato.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Prezzo</th>
+                <th>Categoria</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in _products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("it-IT"))</td>
+                    <td>@product.Category?.Name</td>
+                    <td>@product.Stock</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (_error is not null)
+{
+    <div class="alert alert-danger">@_error</div>
+}
+
+@code {
+    private ProductDto[]? _products;
+    private string? _error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var client = HttpClientFactory.CreateClient("Api");
+            _products = await client.GetFromJsonAsync<ProductDto[]>("/products");
+        }
+        catch (Exception ex)
+        {
+            _error = $"Errore nel caricamento dei prodotti: {ex.Message}";
+            _products = [];
+        }
+    }
+
+    private record CategoryDto(int Id, string Name, string? Description, int ProductCount);
+    private record ProductDto(int Id, string Name, string? Description, decimal Price, CategoryDto? Category, int Stock);
+}

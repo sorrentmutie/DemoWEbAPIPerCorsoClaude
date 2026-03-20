@@ -2,5 +2,6 @@
   <Project Path="src/DemoPerCorsoClaude/DemoPerCorsoClaude.csproj" />
   <Project Path="src/DemoPerCorsoClaude.Domain/DemoPerCorsoClaude.Domain.csproj" />
   <Project Path="src/DemoPerCorsoClaude.Infrastructure/DemoPerCorsoClaude.Infrastructure.csproj" />
+  <Project Path="src/DemoPerCorsoClaude.Web/DemoPerCorsoClaude.Web.csproj" />
   <Project Path="tests/DemoPerCorsoClaude.Tests/DemoPerCorsoClaude.Tests.csproj" />
 </Solution>
