@@ -19,3 +19,5 @@
  aggiorna il @README.md
 
  creiamo un frontend in blazor che usi la API. pensiamo a un componente che ci mostri una tabella dei prodotti e inseriamolo nella home
+
+ 
