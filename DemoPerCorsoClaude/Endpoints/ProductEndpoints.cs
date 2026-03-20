@@ -11,41 +11,44 @@ public static class ProductEndpoints
         var group = app.MapGroup("/products")
             .WithTags("Products");
 
-        group.MapGet("/", (IProductRepository repository) =>
-            Results.Ok(repository.GetAll()))
-            .WithName("GetAllProducts");
-
-        group.MapGet("/{id:int}", (int id, IProductRepository repository) =>
-            repository.GetById(id) is { } product
-                ? Results.Ok(product)
-                : Results.NotFound())
-            .WithName("GetProductById");
-
-        group.MapPost("/", (Product product, IProductRepository repository) =>
-        {
-            var errors = ProductValidator.Validate(product);
-            if (errors.Count > 0)
-                return Results.ValidationProblem(errors);
-
-            var created = repository.Add(product);
-            return Results.Created($"/products/{created.Id}", created);
-        }).WithName("CreateProduct");
-
-        group.MapPut("/{id:int}", (int id, Product product, IProductRepository repository) =>
-        {
-            var errors = ProductValidator.Validate(product);
-            if (errors.Count > 0)
-                return Results.ValidationProblem(errors);
-
-            return repository.Update(id, product) is { } updated
-                ? Results.Ok(updated)
-                : Results.NotFound();
-        }).WithName("UpdateProduct");
-
-        group.MapDelete("/{id:int}", (int id, IProductRepository repository) =>
-            repository.Delete(id)
-                ? Results.NoContent()
-                : Results.NotFound())
-            .WithName("DeleteProduct");
+        group.MapGet("/", GetAll).WithName("GetAllProducts");
+        group.MapGet("/{id:int}", GetById).WithName("GetProductById");
+        group.MapPost("/", Create).WithName("CreateProduct");
+        group.MapPut("/{id:int}", Update).WithName("UpdateProduct");
+        group.MapDelete("/{id:int}", Delete).WithName("DeleteProduct");
     }
+
+    static IResult GetAll(IProductRepository repository) =>
+        Results.Ok(repository.GetAll());
+
+    static IResult GetById(int id, IProductRepository repository) =>
+        repository.GetById(id) is { } product
+            ? Results.Ok(product)
+            : Results.NotFound();
+
+    static IResult Create(Product product, IProductRepository repository)
+    {
+        var errors = ProductValidator.Validate(product);
+        if (errors.Count > 0)
+            return Results.ValidationProblem(errors);
+
+        var created = repository.Add(product);
+        return Results.Created($"/products/{created.Id}", created);
+    }
+
+    static IResult Update(int id, Product product, IProductRepository repository)
+    {
+        var errors = ProductValidator.Validate(product);
+        if (errors.Count > 0)
+            return Results.ValidationProblem(errors);
+
+        return repository.Update(id, product) is { } updated
+            ? Results.Ok(updated)
+            : Results.NotFound();
+    }
+
+    static IResult Delete(int id, IProductRepository repository) =>
+        repository.Delete(id)
+            ? Results.NoContent()
+            : Results.NotFound();
 }
