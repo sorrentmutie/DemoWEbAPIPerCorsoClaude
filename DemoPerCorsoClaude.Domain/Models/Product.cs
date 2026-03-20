@@ -1,7 +1,7 @@
 namespace DemoPerCorsoClaude.Domain.Models;
 
 /// <summary>Rappresenta un prodotto nel catalogo.</summary>
-public class Product
+public record Product
 {
     public int Id { get; set; }
     public required string Name { get; set; }
