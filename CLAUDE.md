@@ -4,17 +4,19 @@ Questo file fornisce indicazioni a Claude Code (claude.ai/code) per lavorare con
 
 ## Panoramica del Progetto
 
-Progetto ASP.NET Core Web API (demo per corso) con target **.NET 10**. Usa lo stile minimal API (nessun controller). Attualmente ha un singolo endpoint `/weatherforecast`.
+Progetto ASP.NET Core Web API (demo per corso) con target **.NET 10**. Usa lo stile minimal API (nessun controller) con architettura a 3 layer.
 
 ## Comandi di Build e Avvio
 
 ```bash
-# Ripristino, compilazione, avvio
-dotnet build DemoPerCorsoClaude/DemoPerCorsoClaude.csproj
-dotnet run --project DemoPerCorsoClaude
+# Compilazione della solution
+dotnet build DemoPerCorsoClaude.slnx
+
+# Avvio
+dotnet run --project src/DemoPerCorsoClaude
 
 # Avvio in modalità watch (hot reload)
-dotnet watch --project DemoPerCorsoClaude
+dotnet watch --project src/DemoPerCorsoClaude
 ```
 
 L'app è in ascolto su `http://localhost:5082` (HTTP) e `https://localhost:7184` (HTTPS).
@@ -22,15 +24,19 @@ L'app è in ascolto su `http://localhost:5082` (HTTP) e `https://localhost:7184`
 ## Struttura della Solution
 
 - `DemoPerCorsoClaude.slnx` — file di soluzione (formato slnx basato su XML)
-- `DemoPerCorsoClaude/` — l'unico progetto Web API
-  - `Program.cs` — entry point dell'applicazione con tutte le definizioni degli endpoint (stile minimal API, nessuna classe Startup)
+- `src/DemoPerCorsoClaude/` — progetto Web API (entry point, endpoint)
+  - `Program.cs` — configurazione servizi e mapping endpoint
+  - `Endpoints/` — classi statiche con MapGroup per ogni risorsa
+- `src/DemoPerCorsoClaude.Domain/` — entità, interfacce, validatori (nessuna dipendenza esterna)
+- `src/DemoPerCorsoClaude.Infrastructure/` — DbContext EF Core, implementazioni repository
 
 ## Dettagli Importanti
 
-- OpenAPI è abilitato in Development tramite `AddOpenApi()` / `MapOpenApi()`
-- Non esiste ancora un progetto di test
-- Nessun controller — tutti gli endpoint sono definiti inline in `Program.cs` con `app.MapGet()` / `app.MapPost()` ecc.
+- OpenAPI + Swagger UI abilitati in Development
+- Persistenza con EF Core InMemory, isolata nel progetto Infrastructure
+- Nessun controller — endpoint definiti in classi statiche con MapGroup e metodi handler
 - Nullable reference types e implicit usings sono abilitati
+- Non esiste ancora un progetto di test
 
 ## Documenti di Riferimento
 
