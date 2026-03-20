@@ -30,3 +30,17 @@ No test project exists — the `.http` file (`DemoPerCorsoClaude/DemoPerCorsoCla
 - HTTPS redirection middleware enabled
 
 This is a demo/teaching project for a programming course ("AzeroUnoProgramming").
+
+## Reference Docs
+
+@import docs/agent_docs/clean-code.md
+<!-- Load when: writing or reviewing any C# code — naming, method length, comments, magic numbers. -->
+
+@import docs/agent_docs/solid-principles.md
+<!-- Load when: adding new types, interfaces, or DI registrations; reviewing architectural boundaries. -->
+
+@import docs/agent_docs/error-handling.md
+<!-- Load when: adding exception handling, middleware, ILogger calls, or Result<T> usage. -->
+
+@import docs/agent_docs/testing-conventions.md
+<!-- Load when: writing or reviewing tests, creating Builders, choosing between real objects and NSubstitute. -->
