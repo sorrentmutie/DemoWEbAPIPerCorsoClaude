@@ -26,6 +26,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapWeatherEndpoints();
+app.MapCategoryEndpoints();
 app.MapProductEndpoints();
 
 app.Run();

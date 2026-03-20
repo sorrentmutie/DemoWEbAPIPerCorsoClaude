@@ -18,6 +18,9 @@ public static class ProductValidator
         if (product.Price > MaxPrice)
             errors[nameof(Product.Price)] = [$"Il prezzo del prodotto non può superare {MaxPrice}€."];
 
+        if (product.CategoryId <= 0)
+            errors[nameof(Product.CategoryId)] = ["La categoria è obbligatoria."];
+
         return errors;
     }
 }

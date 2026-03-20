@@ -19,11 +19,11 @@ public static class ProductEndpoints
     }
 
     static IResult GetAll(IProductRepository repository) =>
-        Results.Ok(repository.GetAll());
+        Results.Ok(repository.GetAll().Select(ProductDto.FromProduct));
 
     static IResult GetById(int id, IProductRepository repository) =>
         repository.GetById(id) is { } product
-            ? Results.Ok(product)
+            ? Results.Ok(ProductDto.FromProduct(product))
             : Results.NotFound();
 
     static IResult Create(Product product, IProductRepository repository)
@@ -33,7 +33,7 @@ public static class ProductEndpoints
             return Results.ValidationProblem(errors);
 
         var created = repository.Add(product);
-        return Results.Created($"/products/{created.Id}", created);
+        return Results.Created($"/products/{created.Id}", ProductDto.FromProduct(created));
     }
 
     static IResult Update(int id, Product product, IProductRepository repository)
@@ -43,7 +43,7 @@ public static class ProductEndpoints
             return Results.ValidationProblem(errors);
 
         return repository.Update(id, product) is { } updated
-            ? Results.Ok(updated)
+            ? Results.Ok(ProductDto.FromProduct(updated))
             : Results.NotFound();
     }
 

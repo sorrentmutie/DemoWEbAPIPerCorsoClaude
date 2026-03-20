@@ -1,6 +1,7 @@
 using DemoPerCorsoClaude.Domain.Models;
 using DemoPerCorsoClaude.Domain.Services;
 using DemoPerCorsoClaude.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DemoPerCorsoClaude.Infrastructure.Repositories;
 
@@ -8,15 +9,16 @@ namespace DemoPerCorsoClaude.Infrastructure.Repositories;
 public class EfProductRepository(AppDbContext context) : IProductRepository
 {
     public IReadOnlyList<Product> GetAll() =>
-        context.Products.ToList().AsReadOnly();
+        context.Products.Include(p => p.Category).ToList().AsReadOnly();
 
     public Product? GetById(int id) =>
-        context.Products.Find(id);
+        context.Products.Include(p => p.Category).FirstOrDefault(p => p.Id == id);
 
     public Product Add(Product product)
     {
         context.Products.Add(product);
         context.SaveChanges();
+        context.Entry(product).Reference(p => p.Category).Load();
         return product;
     }
 
@@ -29,10 +31,11 @@ public class EfProductRepository(AppDbContext context) : IProductRepository
         existing.Name = product.Name;
         existing.Description = product.Description;
         existing.Price = product.Price;
-        existing.Category = product.Category;
+        existing.CategoryId = product.CategoryId;
         existing.Stock = product.Stock;
 
         context.SaveChanges();
+        context.Entry(existing).Reference(p => p.Category).Load();
         return existing;
     }
 

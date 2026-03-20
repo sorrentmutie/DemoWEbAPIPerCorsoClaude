@@ -15,6 +15,7 @@ public static class DependencyInjection
             options.UseInMemoryDatabase("DemoDb"));
 
         services.AddScoped<IProductRepository, EfProductRepository>();
+        services.AddScoped<ICategoryRepository, EfCategoryRepository>();
 
         return services;
     }
